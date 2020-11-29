@@ -40,9 +40,9 @@ bool bank::clientPresent(int input_PIN)
 	return retVal;
 }
 
-int bank::RequestBalanceClient(int accType)
+long long int bank::RequestBalanceClient(int accType)
 {
-	int retVal = 0;
+	long long int retVal = 0;
 	switch(accType)
 	{
 	case 1:
@@ -57,7 +57,7 @@ int bank::RequestBalanceClient(int accType)
 	return retVal;
 }
 
-bool bank::RequestDeposit(int accType,int Mon)
+bool bank::RequestDeposit(int accType,long long int Mon)
 {
 	bool retVal = false;
 	switch(accType)
@@ -67,6 +67,24 @@ bool bank::RequestDeposit(int accType,int Mon)
 		break;
 	case 2:
 		retVal = this->clientRequested->makeDepositSavings(Mon);
+		break;
+	default:
+		break;
+	}
+
+	return retVal;
+}
+
+bool bank::RequestWithdrawal(int accType,long long int Mon)
+{
+	bool retVal = false;
+	switch(accType)
+	{
+	case 1:
+		retVal = this->clientRequested->makeWithdrawalChecking(Mon);
+		break;
+	case 2:
+		retVal = this->clientRequested->makeWithdrawalSavings(Mon);
 		break;
 	default:
 		break;

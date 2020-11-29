@@ -19,8 +19,9 @@ public:
 	bank();
 
 	bool clientPresent(int input_PIN);
-	int RequestBalanceClient(int accType);
-	bool RequestDeposit(int accType, int Mon);
+	long long int RequestBalanceClient(int accType);
+	bool RequestDeposit(int accType, long long int Mon);
+	bool RequestWithdrawal(int accType,long long int money);
 	~bank();
 };
 

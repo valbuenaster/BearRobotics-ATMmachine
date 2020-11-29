@@ -5,7 +5,7 @@
  *      Author: luis
  */
 
-
+#include <limits.h>
 #include "bankClient.h"
 
 
@@ -20,35 +20,87 @@ constexpr bool bankClient::verifyPIN(int pin)
 	return (pin&&this->pin_number);
 }
 
-int bankClient::returnBalanceChecking()
+long long int bankClient::returnBalanceChecking()
 {
 	return this->balance_Checking;
 }
 
-int bankClient::returnBalanceSavings()
+long long int bankClient::returnBalanceSavings()
 {
 	return this->balance_Savings;
 }
 
-bool bankClient::makeDepositChecking(int M)
+bool bankClient::makeDepositChecking(long long int M)
 {
 	bool retVal = true;
-	this->balance_Checking += M;
+
+	if(LLONG_MAX - this->balance_Checking < M)//Overflow
+	{
+		retVal = false;
+	}else{
+		this->balance_Checking += M;
+		retVal = true;
+	}
 
 	//IF SOMETHING HAPPENS, IMPLEMENT THE FALSE CASE
+	//LIKE A COMMUNICATION FAILURE WITH THE REMOTE DATABASE OF THE BANK
+	return retVal;
+}
+
+bool bankClient::makeDepositSavings(long long int M)
+{
+	bool retVal = true;
+
+	if(LLONG_MAX - this->balance_Checking < M)//Overflow
+	{
+		retVal = false;
+	}else{
+		this->balance_Savings += M;
+		retVal = true;
+	}
+
+	//IF SOMETHING HAPPENS, IMPLEMENT THE FALSE CASE
+	//LIKE A COMMUNICATION FAILURE WITH THE REMOTE DATABASE OF THE BANK
 
 	return retVal;
 }
 
-bool bankClient::makeDepositSavings(int M)
+bool bankClient::makeWithdrawalChecking(long long int M)
 {
 	bool retVal = true;
-	this->balance_Savings += M;
+
+	if(this->balance_Checking - M < 0)
+	{
+		retVal = false;
+	}else{
+		this->balance_Checking -= M;
+		retVal = true;
+	}
+	//IF SOMETHING HAPPENS, IMPLEMENT THE FALSE CASE
+	//LIKE A COMMUNICATION FAILURE WITH THE REMOTE DATABASE OF THE BANK
+	return retVal;
+}
+
+bool bankClient::makeWithdrawalSavings(long long int M)
+{
+	bool retVal = true;
+
+	if(this->balance_Savings - M < 0)
+	{
+		retVal = false;
+	}else
+	{
+		this->balance_Savings -= M;
+		retVal = true;
+	}
 
 	//IF SOMETHING HAPPENS, IMPLEMENT THE FALSE CASE
+	//LIKE A COMMUNICATION FAILURE WITH THE REMOTE DATABASE OF THE BANK
 
 	return retVal;
 }
+
+
 bankClient::~bankClient()
 {
 }

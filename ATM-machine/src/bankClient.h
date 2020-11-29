@@ -19,11 +19,14 @@ public:
 
 	constexpr bool verifyPIN(int pin);
 
-	int returnBalanceChecking();
-	int returnBalanceSavings();
+	long long int returnBalanceChecking();
+	long long int returnBalanceSavings();
 
-	bool makeDepositChecking(int M);
-	bool makeDepositSavings(int M);
+	bool makeDepositChecking(long long int M);
+	bool makeDepositSavings(long long int M);
+
+	bool makeWithdrawalChecking(long long int M);
+	bool makeWithdrawalSavings(long long int M);
 
 	~bankClient();
 };
