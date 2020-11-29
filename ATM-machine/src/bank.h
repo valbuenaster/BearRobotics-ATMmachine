@@ -13,9 +13,12 @@
 
 class bank
 {
+	bankClient * clientRequested;
 	std::map<int,bankClient*> dataBase;
 public:
 	bank();
+
+	bool clientPresent(int input_PIN);
 
 	~bank();
 };

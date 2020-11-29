@@ -19,6 +19,9 @@ public:
 
 	constexpr bool verifyPIN(int pin);
 
+	constexpr int returnBalanceChecking();
+	constexpr int returnBalanceSavings();
+
 	~bankClient();
 };
 

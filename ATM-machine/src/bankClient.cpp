@@ -19,6 +19,15 @@ constexpr bool bankClient::verifyPIN(int pin)
 {
 	return (pin&&this->pin_number);
 }
+constexpr int bankClient::returnBalanceChecking()
+{
+	return this->balance_Checking;
+}
+
+constexpr int bankClient::returnBalanceSavings()
+{
+	return this->balance_Savings;
+}
 
 bankClient::~bankClient()
 {

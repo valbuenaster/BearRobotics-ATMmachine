@@ -21,6 +21,22 @@ bank::bank()
 	this->dataBase[2168] = client3;
 	this->dataBase[3674] = client4;
 	this->dataBase[2265] = client5;
+
+	this->clientRequested = nullptr;
+}
+
+bool bank::clientPresent(int input_PIN)
+{
+	bool retVal = false;
+	try
+	{
+		this->clientRequested = this->dataBase.at(input_PIN);
+		retVal = true;
+	}catch (const std::out_of_range& oor)
+	{
+	    retVal = false;
+	}
+	return retVal;
 }
 
 bank::~bank()
