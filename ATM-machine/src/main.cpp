@@ -6,6 +6,7 @@
  */
 
 #include <iostream>
+#include <string>
 #include "bank.h"
 
 using namespace std;
@@ -16,16 +17,16 @@ using namespace std;
 int main()
 {
 	bank *CentralBank = new bank();
-	char insertCard = ' ';
-	char cycle = ' ';
+	string insertCard = " ";
+	string cycle = " ";
 	int input_PIN;
-	char accountType;
+	string accountType;
 	int accType;
 	int activity;
 	long long int money;
 
 	cout<<"ATM CONTROLLER"<<endl;
-	while(insertCard!='@')
+	while(insertCard.find('@')==string::npos)
 	{
 		cout<<"\nplease insert card (\"@\" for card inserted)"<<endl;
 		cin >> insertCard;
@@ -72,13 +73,13 @@ int main()
 			cout <<"\nPlease select an account. (C)hecking or (S)avings"<<endl;
 			cin >> accountType;
 			//cout<<"accountType = "<<accountType<<endl;
-			if(accountType=='c'||accountType=='C')
+			if(accountType.find('c')!=string::npos||accountType.find('C')!=string::npos)
 			{
 				accType = 1;
 				break;
 			}
 
-			if(accountType=='s'||accountType=='S')
+			if(accountType.find('s')!=string::npos||accountType.find('S')!=string::npos)
 			{
 				accType = 2;
 				break;
@@ -141,7 +142,7 @@ int main()
 		cin >> cycle;
 
 		//cout<<"cycle = "<<cycle<<endl;
-		if(cycle=='~')break;
+		if(cycle.find('~')!=string::npos)break;
 	}
 
 	cout<<"Have a nice day";
