@@ -11,7 +11,10 @@
 
 using namespace std;
 
-
+void takingMoney()
+{
+	for(int ii=0;ii<5;ii++)cout << "Taking money..."<<endl;
+}
 
 
 int main()
@@ -23,6 +26,7 @@ int main()
 	string accountType;
 	int accType;
 	int activity;
+	string temp = " ";
 	long long int money;
 
 	cout<<"ATM CONTROLLER"<<endl;
@@ -40,6 +44,7 @@ int main()
 		accType = 0;
 		activity = -1;
 		money = 0;
+		temp = " ";
 
 		cout<<"\nNow, please write your 4 digits PIN number."<<endl;
 		cin >> input_PIN;
@@ -115,8 +120,18 @@ int main()
 		case 2:
 				cout<<"How much money are you going to deposit?"<<endl;
 				cin >> money;
+
+				temp = " ";
+
+				while(temp.find("P")==string::npos)
+				{
+					cout <<"Type \"P\" to emulate a sensor sending the signal that you put the money on the tray"<<endl;
+					cin >> temp;
+				}
+
 				if(CentralBank->RequestDeposit(accType,money))
 				{
+					takingMoney();
 					cout<<"Your transaction was conducted successfully"<<endl;
 				}else{
 					cout<<"There was something wrong. Please talk to one of our representatives at (XXX)-XXX XXX"<<endl;
@@ -128,6 +143,15 @@ int main()
 
 				if(CentralBank->RequestWithdrawal(accType,money))
 				{
+
+					temp = " ";
+
+					while(temp.find("T")==string::npos)
+					{
+						cout <<"Type \"T\" to emulate a sensor sending the signal that you took the money from the tray"<<endl;
+						cin >> temp;
+					}
+
 					cout<<"Your transaction was conducted successfully"<<endl;
 				}else{
 					cout<<"There are not enough funds to conduct the transaction"<<endl;
