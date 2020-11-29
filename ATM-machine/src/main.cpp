@@ -19,7 +19,9 @@ int main()
 	char insertCard = ' ';
 	int input_PIN = 0;
 	char accountType = ' ';
+	int accType = 0;
 	int activity = -1;
+	int money;
 
 	cout<<"ATM CONTROLLER"<<endl;
 	while(insertCard!='@')
@@ -55,10 +57,22 @@ int main()
 	}
 
 	cout<<endl;
-	while(accountType!='c'||accountType!='C'||accountType!='s'||accountType!='S')
+	while(true)
 	{
-		cout <<"\nPlease select an account. (C)hecking or (S)avings"
+		cout <<"\nPlease select an account. (C)hecking or (S)avings"<<endl;
 		cin >> accountType;
+		//cout<<"accountType = "<<accountType<<endl;
+		if(accountType=='c'||accountType=='C')
+		{
+			accType = 1;
+			break;
+		}
+
+		if(accountType=='s'||accountType=='S')
+		{
+			accType = 2;
+			break;
+		}
 	}
 
 	counter = 1;
@@ -76,6 +90,28 @@ int main()
 			cout << "\nYou need to type a valid option. 1, 2 or 3. Please try later today."<<endl;
 			return -1;
 		}
+		counter++;
+	}
+
+	switch(activity)
+	{
+	case 1:
+			cout<<"Your balance is "<<CentralBank->RequestBalanceClient(accType)<<endl;
+			break;
+	case 2:
+			cout<<"How much money you are going to deposit?";
+			cin >> money;
+			if(CentralBank->RequestDeposit(accType,money))
+			{
+				cout<<"Your transaction was conducted successfully"<<endl;
+			}else{
+				cout<<"There was something wrong. Please talk to one of our representatives at (XXX)-XXX XXX"<<endl;
+			}
+			break;
+	case 3:
+			break;
+	default:
+			break;
 	}
 
 	cout<<"Have a nice day";

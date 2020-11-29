@@ -19,17 +19,36 @@ constexpr bool bankClient::verifyPIN(int pin)
 {
 	return (pin&&this->pin_number);
 }
-constexpr int bankClient::returnBalanceChecking()
+
+int bankClient::returnBalanceChecking()
 {
 	return this->balance_Checking;
 }
 
-constexpr int bankClient::returnBalanceSavings()
+int bankClient::returnBalanceSavings()
 {
 	return this->balance_Savings;
 }
 
+bool bankClient::makeDepositChecking(int M)
+{
+	bool retVal = true;
+	this->balance_Checking += M;
+
+	//IF SOMETHING HAPPENS, IMPLEMENT THE FALSE CASE
+
+	return retVal;
+}
+
+bool bankClient::makeDepositSavings(int M)
+{
+	bool retVal = true;
+	this->balance_Savings += M;
+
+	//IF SOMETHING HAPPENS, IMPLEMENT THE FALSE CASE
+
+	return retVal;
+}
 bankClient::~bankClient()
 {
-
 }

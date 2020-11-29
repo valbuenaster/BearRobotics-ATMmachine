@@ -5,6 +5,7 @@
  *      Author: luis
  */
 #include "bank.h"
+#include "bankClient.h"
 
 bank::bank()
 {
@@ -36,6 +37,41 @@ bool bank::clientPresent(int input_PIN)
 	{
 	    retVal = false;
 	}
+	return retVal;
+}
+
+int bank::RequestBalanceClient(int accType)
+{
+	int retVal = 0;
+	switch(accType)
+	{
+	case 1:
+		retVal = this->clientRequested->returnBalanceChecking();
+		break;
+	case 2:
+		retVal = this->clientRequested->returnBalanceSavings();
+		break;
+	default:
+		break;
+	}
+	return retVal;
+}
+
+bool bank::RequestDeposit(int accType,int Mon)
+{
+	bool retVal = false;
+	switch(accType)
+	{
+	case 1:
+		retVal = this->clientRequested->makeDepositChecking(Mon);
+		break;
+	case 2:
+		retVal = this->clientRequested->makeDepositSavings(Mon);
+		break;
+	default:
+		break;
+	}
+
 	return retVal;
 }
 
